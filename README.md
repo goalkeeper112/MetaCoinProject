@@ -13,4 +13,6 @@ Requirements:
   * cd MetaCoinTruffle && truffle compile && trufle migrate
   * cd MetaCoinUI && npm start
   ### NOTE: after deploy the MetaCoin contract you must copy the deploy address and put into reactjs code, the line is this:   
-      ### let MetaCoinAddress = '0x585e9e9aab6e35677ebfbc030d3ee4073307b9b5';
+  ```javascript
+   let MetaCoinAddress = '0x585e9e9aab6e35677ebfbc030d3ee4073307b9b5';
+  ```
