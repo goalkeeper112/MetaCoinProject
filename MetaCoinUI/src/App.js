@@ -4,15 +4,17 @@ import './App.css';
 import Web3 from 'web3';
 
 let web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-let MetaCoinAbi = [{"constant":true,"inputs":[],"name":"mainAddress","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"initialSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"getBalanceInEth","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"receiver","type":"address"},{"name":"amount","type":"uint256"}],"name":"sendCoin","outputs":[{"name":"sufficient","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"getBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"inputs":[],"type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"}];
-let MetaCoinAddress = '0x585e9e9aab6e35677ebfbc030d3ee4073307b9b5';
-let MetaCoin = web3.eth.contract(MetaCoinAbi).at(MetaCoinAddress);
-let initialSupply = MetaCoin.initialSupply();
-let mainAddress = MetaCoin.mainAddress();
+let MetaCoin, MetaCoinAbi, MetaCoinAddress, initialSupply, mainAddress;
 
 class App extends Component {
-  componentWillMount () {
-    console.log(web3);
+  constructor (props) {
+    super(props);
+    let address = prompt("Which address have this contract?");
+    MetaCoinAbi = [{"constant":true,"inputs":[],"name":"mainAddress","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"initialSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"getBalanceInEth","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"receiver","type":"address"},{"name":"amount","type":"uint256"}],"name":"sendCoin","outputs":[{"name":"sufficient","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"getBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"inputs":[],"type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"}];
+    MetaCoinAddress = address;
+    MetaCoin = web3.eth.contract(MetaCoinAbi).at(MetaCoinAddress);
+    initialSupply = MetaCoin.initialSupply();
+    mainAddress = MetaCoin.mainAddress();
   }
 
   getBalance(){
